@@ -918,6 +918,9 @@ class WebAdminController extends Controller
             $invoiceDate = $lastDayOfMonth->format('d M Y');
             $invoiceNumber = sprintf("INV/POS/%04d/%02d/001", $year, $month);
 
+            // Biaya langganan: Bulan pertama Rp 100.000, bulan-bulan berikutnya Rp 80.000
+            $amount = $current->isSameMonth($startCarbon) ? 100000 : 80000;
+
             // Cek apakah status di-override di database AppSetting
             $savedStatus = AppSetting::get("billing_status_{$year}_{$month}");
 
@@ -938,7 +941,7 @@ class WebAdminController extends Controller
                 'month_name' => $monthName,
                 'invoice_number' => $invoiceNumber,
                 'invoice_date' => $invoiceDate,
-                'amount' => $monthlyFee,
+                'amount' => $amount,
                 'status' => $status,
             ];
 
@@ -1005,8 +1008,13 @@ class WebAdminController extends Controller
 
     public function viewInvoice($year, $month)
     {
-        $monthlyFee = 100000;
+        $firstTransaction = Transaction::orderBy('created_at', 'asc')->first();
+        $startCarbon = $firstTransaction && $firstTransaction->created_at 
+            ? Carbon::parse($firstTransaction->created_at)->startOfMonth() 
+            : Carbon::now()->startOfMonth();
+
         $dateCarbon = Carbon::createFromDate($year, $month, 1);
+        $monthlyFee = $dateCarbon->isSameMonth($startCarbon) ? 100000 : 80000;
         $monthName = $dateCarbon->locale('id')->isoFormat('MMMM Y');
         $lastDayOfMonthObj = (clone $dateCarbon)->endOfMonth();
         $lastDayOfMonth = $lastDayOfMonthObj->format('d M Y');
