@@ -35,7 +35,7 @@
             <div class="w-16 h-16 rounded-2xl bg-brand-500 text-white flex items-center justify-center mx-auto shadow-xl shadow-brand-500/30 mb-4">
                 <i class="fa-solid fa-utensils text-2xl"></i>
             </div>
-            <h1 class="text-2xl font-bold text-slate-800">DIMSUM & GOSAM POS</h1>
+            <h1 class="text-2xl font-bold text-slate-800">DIMSUM POS</h1>
             <p class="text-sm text-slate-500 mt-1">Masuk ke Halaman Admin Web</p>
         </div>
 

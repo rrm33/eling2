@@ -68,7 +68,7 @@
                     <i class="fa-solid fa-utensils"></i>
                 </div>
                 <div>
-                    <h1 class="font-bold text-2xl text-slate-800 tracking-tight">DIMSUM & GOSAM POS</h1>
+                    <h1 class="font-bold text-2xl text-slate-800 tracking-tight">DIMSUM POS</h1>
                     <p class="text-xs text-slate-400">Layanan Pemeliharaan System & Software POS</p>
                 </div>
             </div>
@@ -89,7 +89,7 @@
 
             <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100 space-y-1">
                 <span class="font-bold uppercase text-slate-400 block mb-2 text-[10px]">Penyedia Layanan:</span>
-                <h3 class="font-bold text-sm text-slate-800">Tim Pengembang DIMSUM & GOSAM POS</h3>
+                <h3 class="font-bold text-sm text-slate-800">Tim Pengembang DIMSUM POS</h3>
                 <p class="text-slate-600">Sistem Kasir POS & Manajemen Stok Cloud</p>
                 <p class="text-slate-500">Dukungan Server & Pemeliharaan Bulanan</p>
             </div>
@@ -108,7 +108,7 @@
                 <tbody class="divide-y divide-slate-100 font-medium">
                     <tr>
                         <td class="px-5 py-4">
-                            <span class="font-bold text-slate-800 block">Biaya Pemeliharaan & Langganan Aplikasi DIMSUM & GOSAM POS</span>
+                            <span class="font-bold text-slate-800 block">Biaya Pemeliharaan & Langganan Aplikasi DIMSUM POS</span>
                             <span class="text-xs text-slate-400">Termasuk fitur Kasir POS, Manajemen Stok, Multi Cabang, & Server Backup</span>
                         </td>
                         <td class="px-5 py-4 text-center text-xs font-semibold text-slate-600">
@@ -141,7 +141,7 @@
             <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200 font-semibold text-slate-800 flex flex-col sm:flex-row items-center justify-between gap-2">
                 <span>Nominal Tagihan: <strong class="text-slate-900">Rp {{ number_format($monthlyFee, 0, ',', '.') }}</strong></span>
             </div>
-            <p class="text-[10px] text-slate-400 italic mt-2">* Invoice ini adalah bukti sah tagihan langganan bulanan sistem DIMSUM & GOSAM POS.</p>
+            <p class="text-[10px] text-slate-400 italic mt-2">* Invoice ini adalah bukti sah tagihan langganan bulanan sistem DIMSUM POS.</p>
         </div>
 
     </div>

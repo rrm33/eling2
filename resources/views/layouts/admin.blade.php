@@ -61,7 +61,7 @@
                     <i class="fa-solid fa-utensils text-lg"></i>
                 </div>
                 <div>
-                    <h1 class="font-bold text-base leading-tight tracking-wide">DIMSUM & GOSAM POS</h1>
+                    <h1 class="font-bold text-base leading-tight tracking-wide">DIMSUM POS</h1>
                     <p class="text-xs text-slate-400">Admin Web Dashboard</p>
                 </div>
             </div>

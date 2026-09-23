@@ -13,7 +13,7 @@
                 <i class="fa-solid fa-file-invoice-dollar"></i>
             </div>
             <div>
-                <h3 class="font-bold text-slate-800 text-lg">Langganan Sistem DIMSUM & GOSAM POS</h3>
+                <h3 class="font-bold text-slate-800 text-lg">Langganan Sistem DIMSUM POS</h3>
                 <p class="text-xs text-slate-500 mt-0.5">Biaya pemeliharaan & lisensi sistem POS sebesar <strong class="text-slate-800">Rp 100.000 / bulan</strong> (jatuh tempo di akhir bulan).</p>
             </div>
         </div>
