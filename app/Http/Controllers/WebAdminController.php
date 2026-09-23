@@ -901,7 +901,7 @@ class WebAdminController extends Controller
         $firstTransaction = Transaction::orderBy('created_at', 'asc')->first();
         $startCarbon = $firstTransaction && $firstTransaction->created_at 
             ? Carbon::parse($firstTransaction->created_at)->startOfMonth() 
-            : Carbon::create(2026, 5, 1)->startOfMonth();
+            : Carbon::now()->startOfMonth();
 
         $nowCarbon = Carbon::now()->startOfMonth();
 
