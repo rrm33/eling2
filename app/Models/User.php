@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
@@ -12,39 +11,37 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
+
 #[Fillable(['name', 'email', 'password', 'shop_id', 'role'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable implements FilamentUser
 {
-    /** @use HasFactory<UserFactory> */
     use HasApiTokens, HasFactory, Notifiable;
+
+    protected static function booted(): void
+    {
+        static::addGlobalScope('hideSuperAdminFromLowerRoles', function ($builder) {
+            if (auth()->check() && auth()->user()->role !== 'super_admin') {
+                $builder->where('users.role', '!=', 'super_admin');
+            }
+        });
+    }
 
     public function canAccessPanel(Panel $panel): bool
     {
-        return $this->role === 'admin';
+        return $this->role === 'admin' || $this->role === 'super_admin';
     }
 
-    /**
-     * Get the user's role.
-     */
     public function getRoleAttribute($value)
     {
         return $value ? strtolower($value) : $value;
     }
 
-    /**
-     * Set the user's role.
-     */
     public function setRoleAttribute($value)
     {
         $this->attributes['role'] = $value ? strtolower($value) : $value;
     }
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
     protected function casts(): array
     {
         return [
