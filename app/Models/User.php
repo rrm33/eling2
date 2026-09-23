@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Sanctum\HasApiTokens;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
@@ -21,8 +22,12 @@ class User extends Authenticatable implements FilamentUser
     protected static function booted(): void
     {
         static::addGlobalScope('hideSuperAdminFromLowerRoles', function ($builder) {
-            if (auth()->check() && auth()->user()->role !== 'super_admin') {
-                $builder->where('users.role', '!=', 'super_admin');
+            // Use Auth::hasUser() to check in-memory resolved user, preventing infinite recursion
+            if (app()->bound('auth') && Auth::hasUser()) {
+                $user = Auth::user();
+                if ($user && $user->role !== 'super_admin') {
+                    $builder->where('users.role', '!=', 'super_admin');
+                }
             }
         });
     }
