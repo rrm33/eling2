@@ -88,9 +88,11 @@ class ShopController extends Controller
             return response()->json(['message' => 'Toko Pusat tidak bisa dihapus.'], 422);
         }
 
-        if ($shop->users()->count() > 0) {
-            return response()->json(['message' => 'Toko tidak bisa dihapus karena masih memiliki staff.'], 422);
-        }
+        // Lepas relasi akun staff/kasir dari cabang ini agar tidak terkunci
+        $shop->users()->update(['shop_id' => null]);
+
+        // Hapus data stok cabang terkait
+        $shop->productStocks()->delete();
 
         if ($shop->logo) {
             Storage::disk('public')->delete($shop->logo);

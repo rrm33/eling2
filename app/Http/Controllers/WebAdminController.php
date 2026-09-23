@@ -645,6 +645,21 @@ class WebAdminController extends Controller
     public function deleteShop($id)
     {
         $shop = Shop::findOrFail($id);
+
+        if ($shop->is_main) {
+            return back()->with('error', 'Toko Pusat tidak bisa dihapus.');
+        }
+
+        // Lepas relasi akun staff/kasir dari cabang ini agar tidak terkunci
+        $shop->users()->update(['shop_id' => null]);
+
+        // Hapus data stok cabang terkait
+        $shop->productStocks()->delete();
+
+        if ($shop->logo) {
+            Storage::disk('public')->delete($shop->logo);
+        }
+
         $shop->delete();
         return back()->with('success', 'Cabang berhasil dihapus.');
     }
